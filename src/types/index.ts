@@ -59,7 +59,7 @@ export interface SuggestionsModel {
 
 export interface TagsModel extends DragModel {
   disableInput?: boolean;
-  inputRef: RefObject<HTMLElement>;
+  inputRef: RefObject<HTMLDivElement>;
   items: TagViewModel[];
   onClearTags: () => void;
   onDelete?: (id: string) => void;
@@ -84,7 +84,7 @@ export interface EditTextModel {
   onEditStatusChanged: (status: boolean) => void;
   onSaveEdit?: (value: string) => void;
   placeholder?: string;
-  ref?: RefObject<HTMLElement>;
+  ref?: RefObject<HTMLDivElement>;
   showCursor?: boolean;
   value: string;
   editable?: boolean;

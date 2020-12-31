@@ -27,8 +27,7 @@ const Main: React.FunctionComponent<Props> = ({
   const [exclSuggestions, setExclSuggestions] = useState<string[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [message, setMessage] = useState<string>(placeholder);
-  const [inputFocused, setInputFocused] = useState(false);
-  const inputRef = useRef<HTMLSpanElement>(null);
+  const inputRef = useRef<HTMLDivElement>(null);
 
   // ** computed methods
 

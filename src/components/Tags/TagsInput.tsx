@@ -1,19 +1,18 @@
-import React, { RefObject, useCallback, useRef, useState } from 'react';
+import React, { RefObject } from 'react';
 import { EditTextComponent } from '../EditBox/EditText';
 import { TagsInputWrapper } from './TagsInput.style';
 
 interface ITagInputModel {
   onInput: (value: string) => void;
-  inputRef: RefObject<HTMLElement>;
+  inputRef: RefObject<HTMLDivElement>;
   onStatusChange: (status: boolean) => void;
 }
 
 const TagInputComponent: React.FunctionComponent<ITagInputModel> = ({
   onInput,
   inputRef,
-  onStatusChange
+  onStatusChange,
 }) => {
-
   const handleCreate = (text: string) => {
     onInput(text);
   };
