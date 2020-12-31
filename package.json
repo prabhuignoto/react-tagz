@@ -7,6 +7,11 @@
     "lint": "prettier --check \"src/**/*.{js,jsx,ts,tsx}\""
   },
   "dependencies": {
+    "@emotion/core": "^11.0.0",
+    "@emotion/react": "^11.1.4",
+    "@emotion/styled": "^11.0.0",
+    "classnames": "^2.2.6",
+    "focus-visible": "^5.2.0",
     "react": "^17.0.0",
     "react-dom": "^17.0.0"
   },
@@ -20,7 +25,6 @@
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@types/snowpack-env": "^2.3.2",
-    "@web/test-runner": "^0.10.0",
     "chai": "^4.2.0",
     "prettier": "^2.0.5",
     "snowpack": "^2.18.4",
