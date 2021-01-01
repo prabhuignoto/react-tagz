@@ -17,44 +17,51 @@ const banner = `/*
 `;
 
 export default {
-  input: "src/react-tagz.ts",
+  input: 'src/react-tagz.ts',
   output: [
     {
       file: pkg.main,
-      format: "cjs",
-      exports: "named",
+      format: 'cjs',
+      exports: 'named',
       strict: true,
       banner,
     },
     {
       file: pkg.module,
-      format: "es",
-      exports: "named",
+      format: 'es',
+      exports: 'named',
       strict: true,
       banner,
     },
     {
       file: pkg.umd,
-      format: "umd",
-      exports: "named",
+      format: 'umd',
+      exports: 'named',
       strict: true,
       banner,
-      name: "ReactTagz",
+      name: 'ReactTagz',
       globals: {
-        react: "React",
-        "react-dom": "ReactDOM"
+        react: 'React',
+        'react-dom': 'ReactDOM',
       },
     },
   ],
   plugins: [
     typescript(),
     babel({
-      extensions: ["tsx", "ts"],
-      babelHelpers: "runtime",
+      extensions: ['tsx', 'ts'],
+      babelHelpers: 'runtime',
       plugins: [
-        "@babel/plugin-transform-runtime",
-        "@babel/plugin-proposal-optional-chaining",
+        '@babel/plugin-transform-runtime',
+        '@babel/plugin-proposal-optional-chaining',
+        [
+          '@emotion',
+          {
+            sourceMap: false,
+          },
+        ],
       ],
+      presets: ['@babel/preset-react'],
     }),
     buble({
       objectAssign: true,
@@ -63,17 +70,15 @@ export default {
       },
     }),
     postcss({
-      plugins: [cssnano({
-        preset: 'default'
-      })]
+      plugins: [
+        cssnano({
+          preset: 'default',
+        }),
+      ],
     }),
     common(),
     resolve(),
-    terser()
+    terser(),
   ],
-  external: [
-    "react",
-    "react-dom",
-    "@babel/runtime",
-  ],
+  external: ['react', 'react-dom', '@babel/runtime'],
 };

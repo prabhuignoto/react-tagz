@@ -15,6 +15,7 @@ export const Tag = styled.li<{ hide?: number; hasFocus?: number }>`
   font-size: 1rem;
   margin: 0.25rem 0.25rem;
   outline: 0;
+  padding: 0.25rem;
 `;
 
 export const CloseIconWrapper = styled.span`

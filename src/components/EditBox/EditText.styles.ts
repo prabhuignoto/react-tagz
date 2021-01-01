@@ -35,7 +35,7 @@ export const EditText = styled.span<{ selectAll?: boolean }>`
   font-size: 0.85rem;
   order: 1;
   min-width: 4px;
-  padding: 0.2rem;
+  padding: 0.25rem 0.2rem 0.25rem 0.1rem;
 `;
 
 export const Blink = styled.span<BlinkStyleModel>`

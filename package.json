@@ -33,6 +33,7 @@
     "@babel/plugin-transform-runtime": "^7.12.10",
     "@babel/plugin-transform-typescript": "^7.12.1",
     "@babel/preset-react": "^7.12.10",
+    "@emotion/babel-plugin": "^11.1.2",
     "@rollup/plugin-babel": "^5.2.2",
     "@rollup/plugin-buble": "^0.21.3",
     "@rollup/plugin-commonjs": "^17.0.0",
@@ -62,7 +63,6 @@
   "browserslist": [
     "last 3 versions",
     "not ie <= 11",
-    "not dead",
     "> 5%"
   ],
   "main": "dist/react-tagz.js",
