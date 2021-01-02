@@ -6,9 +6,9 @@ import React, {
   useState,
 } from 'react';
 import { Mode, Props, TagViewModel } from '../types';
-import { MainWrapper } from './main.styles';
 import { SuggestionsComponent } from './Suggestions/Suggestions';
 import { TagsComponent } from './Tags/Tags';
+import "./main.css";
 
 const Main: React.FunctionComponent<Props> = ({
   items,
@@ -203,7 +203,7 @@ const Main: React.FunctionComponent<Props> = ({
   }, []);
 
   return (
-    <MainWrapper>
+    <div className="main-wrapper">
       <TagsComponent
         disableInput={disableInput}
         inputRef={inputRef}
@@ -233,7 +233,7 @@ const Main: React.FunctionComponent<Props> = ({
           onSelection={onSuggestionSelected}
         />
       )}
-    </MainWrapper>
+    </div>
   );
 };
 

@@ -1,19 +1,21 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import type { BlinkCursorModel } from 'src/types';
-import { Blink } from './EditText.styles';
+import './EditText.css';
 
 const BlinkCursor: React.FunctionComponent<BlinkCursorModel> = ({
   hasFocus,
-  cursorSize,
-  selectAll,
   order,
-}) => (
-  <Blink
-    visible={hasFocus ? 1 : 0}
-    size={cursorSize}
-    selectAll={selectAll ? 1 : 0}
-    style={{ order }}
-  />
-);
+}) => {
+  const blinkStyle = useMemo(
+    () =>
+      ({
+        '--blink-visibility': hasFocus ? 'visibility' : 'hidden',
+        '--blink-order': order
+      } as React.CSSProperties),
+    [hasFocus, order],
+  );
+
+  return <span className="blink" style={blinkStyle} />;
+};
 
 export { BlinkCursor };

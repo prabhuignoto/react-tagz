@@ -2,8 +2,8 @@ import React from 'react';
 import type { TagsModel } from '../../types';
 import { Toolbar } from '../Tags-Toolbar/Toolbar';
 import { TagComponent } from './Tag';
-import { TagsWrapper } from './Tags.style';
 import { TagInputComponent } from './TagsInput';
+import "./Tags.css";
 
 const TagsComponent: React.FunctionComponent<TagsModel> = ({
   disableInput,
@@ -11,8 +11,6 @@ const TagsComponent: React.FunctionComponent<TagsModel> = ({
   items,
   onClearTags,
   onDelete,
-  onDragEnded,
-  onDragStarted,
   onInput,
   onSaveEdit,
   onToggleSuggestions,
@@ -21,14 +19,12 @@ const TagsComponent: React.FunctionComponent<TagsModel> = ({
   onInputStatusChanged,
 }) => {
   return (
-    <TagsWrapper>
+    <ul className="tags-wrapper">
       {items.map((item) => (
         <TagComponent
           {...item}
           key={item.id}
           onDelete={onDelete}
-          onDragEnded={onDragEnded}
-          onDragStarted={onDragStarted}
           onSaveEdit={onSaveEdit}
         />
       ))}
@@ -47,7 +43,7 @@ const TagsComponent: React.FunctionComponent<TagsModel> = ({
           disableTrash={!items.length}
         />
       )}
-    </TagsWrapper>
+    </ul>
   );
 };
 

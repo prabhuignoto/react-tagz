@@ -1,16 +1,14 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
 import type { TagViewModel } from '../../types';
-import { CloseIcon } from '../icons';
 import { EditTextComponent } from '../EditBox/EditText';
-import { CloseIconWrapper, Tag, TagContentWrapper } from './Tag.style';
+import { CloseIcon } from '../icons';
+import './Tag.css';
 
 const TagComponent: React.FunctionComponent<TagViewModel> = ({
   name,
   id,
   onDelete,
   readOnly,
-  onDragEnded,
-  onDragStarted,
   hide,
   onSaveEdit,
 }) => {
@@ -25,7 +23,7 @@ const TagComponent: React.FunctionComponent<TagViewModel> = ({
   const onEditStatusChanged = useCallback((status: boolean) => {
     setIsTagEdited(status);
 
-    if(status) {
+    if (status) {
       tagRef.current && tagRef.current.focus();
     } else {
       tagRef.current && tagRef.current.blur();
@@ -34,9 +32,18 @@ const TagComponent: React.FunctionComponent<TagViewModel> = ({
 
   const tagRef = useRef<HTMLDivElement>(null);
 
+  const style = useMemo(
+    () =>
+      ({
+        '--tag-bg-color': isTagEdited ? '#FFF' : 'rgba(248,222,126,1.0)',
+        '--tag-border-color': isTagEdited ? '#494949' : 'transparent',
+      } as React.CSSProperties),
+    [isTagEdited],
+  );
+
   return (
-    <Tag tabIndex={0} hasFocus={isTagEdited ? 1 : 0}>
-      <TagContentWrapper>
+    <li className="tag" style={style} tabIndex={0}>
+      <div>
         <EditTextComponent
           value={name}
           onSaveEdit={onSave}
@@ -45,16 +52,17 @@ const TagComponent: React.FunctionComponent<TagViewModel> = ({
           mode="EDIT"
           editable={!readOnly}
         />
-      </TagContentWrapper>
+      </div>
       {!readOnly && (
-        <CloseIconWrapper
+        <span
           onClick={() => id && onDelete && onDelete(id)}
           tabIndex={0}
+          className="close-icon-wrapper"
         >
           <CloseIcon />
-        </CloseIconWrapper>
+        </span>
       )}
-    </Tag>
+    </li>
   );
 };
 

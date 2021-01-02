@@ -3,16 +3,11 @@ import React, {
   useEffect,
   useMemo,
   useRef,
-  useState,
+  useState
 } from 'react';
 import type { EditTextModel } from 'src/types';
 import { BlinkCursor } from './BlinkCursor';
-import {
-  Char,
-  CharWrapper,
-  EditText,
-  EditTextWrapper,
-} from './EditText.styles';
+import "./EditText.css";
 import { PlaceholderComponent } from './Placeholder';
 
 const EditTextComponent = React.forwardRef<HTMLDivElement, EditTextModel>(
@@ -209,8 +204,26 @@ const EditTextComponent = React.forwardRef<HTMLDivElement, EditTextModel>(
       [hasFocus, selectAll, cursorPosition, editText],
     );
 
+    const editTextStyle = useMemo(
+      () =>
+        selectAll
+          ? ({
+              background: '#ccc',
+              color: '#000',
+            } as React.CSSProperties)
+          : ({
+            background: 'transparent'
+          }),
+      [selectAll],
+    );
+
+    const charStyle = useMemo(() => ({
+      order: blinkPosition === "front" ? 2 : 1
+    }) as React.CSSProperties, [blinkPosition]);
+
     const TextView = (
-      <EditTextWrapper
+      <div
+        className="edit-txt-wrapper"
         onBlur={onRemFocus}
         onKeyDown={handleKeyInput}
         tabIndex={0}
@@ -224,11 +237,11 @@ const EditTextComponent = React.forwardRef<HTMLDivElement, EditTextModel>(
             onBlr={onRemFocus}
           />
         )}
-        <EditText selectAll={selectAll}>
+        <span className="edit-text" style={editTextStyle}>
           {cursorPosition < 0 && Blink}
           {[...editText].map((char, index) => (
-            <CharWrapper key={index}>
-              <Char position={blinkPosition}>{char}</Char>
+            <span key={index} className="char-wrapper">
+              <span style={charStyle}>{char}</span>
               {index === cursorPosition && (
                 <BlinkCursor
                   hasFocus={hasFocus}
@@ -237,10 +250,10 @@ const EditTextComponent = React.forwardRef<HTMLDivElement, EditTextModel>(
                   order={index + 1}
                 />
               )}
-            </CharWrapper>
+            </span>
           ))}
-        </EditText>
-      </EditTextWrapper>
+        </span>
+      </div>
     );
 
     return TextView;
@@ -248,3 +261,4 @@ const EditTextComponent = React.forwardRef<HTMLDivElement, EditTextModel>(
 );
 
 export { EditTextComponent };
+

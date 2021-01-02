@@ -28,7 +28,7 @@ function App({}: AppProps) {
           'Aruba',
         ]}
         placeholder=""
-        maxTags={15}
+        maxTags={5}
       />
     </div>
   );

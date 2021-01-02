@@ -1,0 +1,10 @@
+
+.tags-input-wrapper {
+  align-self: center;
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.tags-input-wrapper:hover {
+  cursor: text;
+}

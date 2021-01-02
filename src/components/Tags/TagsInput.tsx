@@ -1,6 +1,6 @@
 import React, { RefObject } from 'react';
 import { EditTextComponent } from '../EditBox/EditText';
-import { TagsInputWrapper } from './TagsInput.style';
+import "./TagsInput.css";
 
 interface ITagInputModel {
   onInput: (value: string) => void;
@@ -18,7 +18,7 @@ const TagInputComponent: React.FunctionComponent<ITagInputModel> = ({
   };
 
   return (
-    <TagsInputWrapper>
+    <div className="tags-input-wrapper">
       <EditTextComponent
         value={''}
         onSaveEdit={handleCreate}
@@ -28,7 +28,7 @@ const TagInputComponent: React.FunctionComponent<ITagInputModel> = ({
         mode="INPUT"
         editable
       />
-    </TagsInputWrapper>
+    </div>
   );
 };
 

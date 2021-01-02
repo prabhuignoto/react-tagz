@@ -10,12 +10,7 @@ export interface DropTarget {
   dest: string;
 }
 
-interface DragModel {
-  onDragEnded?: (id: string) => void;
-  onDragStarted?: (id: string) => void;
-}
-
-export interface TagViewModel extends TagModel, DragModel {
+export interface TagViewModel extends TagModel {
   hide?: boolean;
   id?: string;
   onDelete?: (id: string) => void;
@@ -57,7 +52,7 @@ export interface SuggestionsModel {
   onSelection: (value: string) => void;
 }
 
-export interface TagsModel extends DragModel {
+export interface TagsModel {
   disableInput?: boolean;
   inputRef: RefObject<HTMLDivElement>;
   items: TagViewModel[];

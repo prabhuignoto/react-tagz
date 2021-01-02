@@ -1,0 +1,42 @@
+.nav-bar-wrapper {
+  align-items: center;
+  display: flex;
+  margin-top: 1rem;
+  padding: 0.2rem 0;
+  width: 100%;
+}
+
+.nav-bar-controls {
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
+  margin: 0;
+  margin-left: auto;
+  padding: 0;
+  width: 30%;
+}
+
+.nav-bar-message {
+  font-size: 0.75rem;
+  font-style: italic;
+  font-weight: 500;
+  max-width: 65%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.nav-bar-control {
+  align-items: center;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  display: flex;
+  height: 1rem;
+  justify-content: center;
+  margin: 0 0.25rem;
+  width: 1rem;
+
+  filter: opacity(var(--control-opacity));
+  pointer-events: var(--pointer-events);
+}

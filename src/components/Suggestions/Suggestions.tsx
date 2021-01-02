@@ -1,16 +1,8 @@
+import cls from 'classnames';
 import React, { useEffect, useMemo, useState } from 'react';
-import type { SuggestionsModel, SuggestModel } from '../../types';
+import { Mode, SuggestionsModel, SuggestModel } from '../../types';
 import { CheckIcon, CloseIcon } from '../icons';
-import {
-  CloseButton,
-  StatusLabel,
-  SuggestCheckIcon,
-  Suggestion,
-  SuggestionHeader,
-  Suggestions,
-  SuggestionsWrapper,
-  SuggestText,
-} from './Suggestions.styles';
+import './Suggestions.css';
 
 const SuggestionsComponent: React.FunctionComponent<SuggestionsModel> = ({
   items,
@@ -49,18 +41,17 @@ const SuggestionsComponent: React.FunctionComponent<SuggestionsModel> = ({
   );
 
   return _items.length ? (
-    <SuggestionsWrapper>
-      <SuggestionHeader>
-        <StatusLabel>{statusLabel}</StatusLabel>
-        <CloseButton onClick={onCloseSuggestion}>
+    <div className="suggestions-wrapper">
+      <span className="sug-header">
+        <span className="status-label">{statusLabel}</span>
+        <button onClick={onCloseSuggestion} className="close-button">
           <CloseIcon />
-        </CloseButton>
-      </SuggestionHeader>
-      <Suggestions mode={mode}>
+        </button>
+      </span>
+      <ul className="suggestions">
         {_items.map((item, index) => (
-          <Suggestion
+          <li
             key={index}
-            mode={mode}
             onClick={() => {
               if (!item.selected) {
                 onSelection(item.value);
@@ -68,21 +59,25 @@ const SuggestionsComponent: React.FunctionComponent<SuggestionsModel> = ({
                 onDelete(item.value);
               }
             }}
-            disable={!item.selected && disableInput}
-            selected={item.selected}
+            className={cls({
+              suggestion: true,
+              disabled: !item.selected && disableInput,
+              selected: item.selected,
+              list: mode === Mode.LIST_MODE,
+            })}
           >
-            <SuggestText style={{ paddingLeft: '1rem' }}>
+            <span style={{ paddingLeft: '1rem' }} className="suggestion">
               {item.value}
-            </SuggestText>
+            </span>
             {item.selected && (
-              <SuggestCheckIcon>
+              <span className="check-icon-wrapper">
                 <CheckIcon />
-              </SuggestCheckIcon>
+              </span>
             )}
-          </Suggestion>
+          </li>
         ))}
-      </Suggestions>
-    </SuggestionsWrapper>
+      </ul>
+    </div>
   ) : null;
 };
 

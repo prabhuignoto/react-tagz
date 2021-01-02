@@ -47,19 +47,20 @@ export default {
     },
   ],
   plugins: [
+    postcss({
+      plugins: [
+        cssnano({
+          preset: 'default',
+        }),
+      ],
+    }),
     typescript(),
     babel({
       extensions: ['tsx', 'ts'],
       babelHelpers: 'runtime',
       plugins: [
         '@babel/plugin-transform-runtime',
-        '@babel/plugin-proposal-optional-chaining',
-        [
-          '@emotion',
-          {
-            sourceMap: false,
-          },
-        ],
+        '@babel/plugin-proposal-optional-chaining'
       ],
       presets: ['@babel/preset-react'],
     }),
@@ -69,16 +70,17 @@ export default {
         templateString: false,
       },
     }),
-    postcss({
-      plugins: [
-        cssnano({
-          preset: 'default',
-        }),
-      ],
-    }),
     common(),
     resolve(),
-    terser(),
+    terser({
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+      },
+      format: {
+        comments: false
+      }
+    }),
   ],
   external: ['react', 'react-dom', '@babel/runtime'],
 };

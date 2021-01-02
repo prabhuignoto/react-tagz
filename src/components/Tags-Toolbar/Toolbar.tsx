@@ -1,31 +1,38 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import type { ToolbarModel } from 'src/types';
 import { ListIcon, TrashIcon } from '../icons';
-import {
-  NavbarControl,
-  NavbarControls,
-  NavbarMessage,
-  NavBarWrapper,
-} from './Toolbar.styles';
+import './Toolbar.css';
 
-const Toolbar: React.FunctionComponent<ToolbarModel> = React.memo(
+const Toolbar: React.FunctionComponent<ToolbarModel> = 
   ({ message, onClear, onShowSuggestions, disableTrash }) => {
-    return (
-      <NavBarWrapper>
-        <NavbarMessage>{message}</NavbarMessage>
-        <NavbarControls>
-          <NavbarControl onClick={onClear} disable={disableTrash ? 1 : 0}>
-            <TrashIcon />
-          </NavbarControl>
-          <NavbarControl onClick={onShowSuggestions}>
-            <ListIcon />
-          </NavbarControl>
-        </NavbarControls>
-      </NavBarWrapper>
+    const trashIconStyle = useMemo(
+      () =>
+        disableTrash
+          ? ({
+              '--control-opacity': 0.5,
+              '--pointer-events': 'none',
+            } as React.CSSProperties)
+          : {},
+      [disableTrash],
     );
-  },
-  (prev, next) =>
-    prev.message === next.message && prev.disableTrash === next.disableTrash,
-);
+
+    return (
+      <nav className="nav-bar-wrapper">
+        <span className="nav-bar-message">{message}</span>
+        <ul className="nav-bar-controls">
+          <li
+            onClick={onClear}
+            className="nav-bar-control"
+            style={trashIconStyle}
+          >
+            <TrashIcon />
+          </li>
+          <li onClick={onShowSuggestions} className="nav-bar-control">
+            <ListIcon />
+          </li>
+        </ul>
+      </nav>
+    );
+  };
 
 export { Toolbar };
